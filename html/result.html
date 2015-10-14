@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EECS 492 A1 Results</title>
+</head>
+<body>
+<p>
+EECS 492 A1 Results<br>
+Shujie CHEN<br>
+September 27, 2015<br>
+</p>
+<h2>A1 Results</h2>
+<p>
+The purpose of this project is to recreate
+<a href="http://rogeralsing.com/2008/12/07/genetic-programming-evolution-of-mona-lisa/">Roger
+Alsing's work on genetic programming to create art</a>.
+The population consists of approximations to a given image.
+Each image uses P polygons, where P=100 for the results on this page.
+N is the population size and K is the number of new children created per generation.
+T is the number of generations displayed in each animation.
+The fitness of the image is a measure of how closely it matches the original image.
+The learning curve shows how the fitness of the best approximation improves over time.
+The 3D graphs depict how the fitness after 25000 generations varies with N and K.
+</p>
+<table border=1>
+<tr>
+<th>Original image</th>
+<th>Approximation</th>
+<th>Learning curve</th>
+</tr>
+<tr>
+<td>96&times;96 pixels<br><img src="im_darwin.jpg"></td>
+<td>P=100, N=1, K=2<br><img src = "output_darwin.gif"></img></td>
+<td><img width=300 height=200 src="fitness(darwin).png"></td>
+<td><img width=400 height=400 src="darwin.png"><br>N=2, K=2 gave the best result<td>
+</tr>
+<tr>
+<td>100&times;100 pixels<br><img src="gril.jpg"></td>
+<td>P=100, N=2, K=1<br><img src="output_girl.gif"></td>
+<td><img width=300 height=200 src="fitness(girl).png"></td>
+<td><img width=400 height=400 src="girl.png"><br>N=1, K=1 gave the best result<td>
+</tr>
+<tr>
+<td>102&times;102 pixels<br><img src="mon_child.jpg"></td>
+<td>P=100, N=1, K=2<br><img src="output_mon.gif"></td>
+<td><img width=300 height=200 src="fitness(woman_child).png"></td>
+<td><img width=400 height=400 src="mom.png"><br>N=2, K=1 gave the best result</td>
+</tr>
+<tr>
+<td>128&times;128 pixels<br><img src="mona-lisa.jpg"></td>
+<td>P=100, N=1, K=1<br><img src="output_monalisa.gif"></td>
+<td><img width=300 height=200 src="fitness(monalisa).png"></td>
+<td><img width=400 height=400 src="monalisa-N.png"><br>N=1, K=1 gave the best result</td>
+</tr>
+<tr>
+<td>100&times;100 pixels<br><img src="woman.jpg"></td>
+<td>P=100, N=2, K=1<br><img src="output_woman.gif"></td>
+<td><img width=300 height=200 src="fitness(woman).png"></td>
+<td><img width=400 height=400 src="woman-N.png"><br>N=4, K=2 gave the best result</td>
+</tr>
+</table>
+<img width=600 height=600 src="result.png"><br>
+N=1, K=1 gave the best result overall after 25000 generations, while N=1, K=2 is almost as good as it.<br>
+<hr>
+<p>
+Mutations used:
+<ul>
+<li>With 1/5 probability, replace a polygon with a random triangle.</li>
+<li>With 1/5 probability, swap the order of two polygons which are in adjacent depth layers.</li>
+<li>With 2/5 probability, mutate an existing polygon's color:
+<ul>
+<li>With 1/2 probability, alter the color slightly.</li>
+<li>With 1/2 probability, alter the color of one polygon compeletely
+</ul></li>
+<li>With 1/5 probability, replace a polygon's vortex with a random one.</li>
+</ul>
+</p>
+<p>
+Random triangles were created by picking a point on the image with uniform distribution,
+then adding a Gaussian distribution of mean 0 and
+standard deviation 20% of the image width to the point to obtain the vertices.
+Random colors were picked using uniform distribution over the RGB color space.
+</p>
+<p>
+Parents were selected from the comparision of the two fitness values: which means that everytime I let the gene mutation take place and compare it with the former fitness value. If the fitness value increases, then I will let the kids be the new parents for the next generation; if the fitness value decreases, I will kill the kids and keep the origin parents as the parents for the next generation. This algorithm is like Darwin's nature select theory, which means the changes are random, but only those "good" changers will be able to have their descendants, and this promises an increasing fitness value(but become slower later).
+</p>
+</body>
+</html>
